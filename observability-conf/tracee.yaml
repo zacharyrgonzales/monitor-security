@@ -28,6 +28,10 @@ spec:
         securityContext:
           privileged: true
         volumeMounts:
+        - name: tmp-usrsrc
+          mountPath: /usr/src
+        - name: tmp-libmodules
+          mountPath: /lib/modules
         - name: tmp-tracee
           mountPath: /tmp/tracee
         - name: etc-os-release
@@ -46,6 +50,12 @@ spec:
         - effect: NoExecute
           operator: Exists
       volumes:
+      - hostPath:
+          path: /usr/src
+        name: tmp-usrsrc
+      - hostPath:
+          path: /lib/modules
+        name: tmp-libmodules
       - hostPath:
           path: /tmp/tracee
         name: tmp-tracee
